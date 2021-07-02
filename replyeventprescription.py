@@ -56,7 +56,9 @@ def callback():
 
 
 @handler.add(MessageEvent, message=TextMessage)
-med[x]=input("Add your perscription: ")
+med[x] = input("Add your perscription: ")
+howto[x] = input("Schedule of consumption: ")
+price[x] = input("Price of prescription: ")
 
 
 def message_text(event):
@@ -128,7 +130,7 @@ def message_text(event):
             "contents": [
               {
                 "type": "text",
-                "text": "1 capsule after meals",
+                "text": howto[0],
                 "color": "#8C8C8C",
                 "size": "sm",
                 "wrap": true
@@ -155,7 +157,7 @@ def message_text(event):
         "contents": [
           {
             "type": "text",
-            "text": "Medicine 2",
+            "text": med[1],
             "color": "#ffffff",
             "align": "start",
             "size": "md",
@@ -207,7 +209,7 @@ def message_text(event):
             "contents": [
               {
                 "type": "text",
-                "text": "1 tablet before sleeping",
+                "text": howto[1],
                 "color": "#8C8C8C",
                 "size": "sm",
                 "wrap": true
@@ -234,7 +236,7 @@ def message_text(event):
         "contents": [
           {
             "type": "text",
-            "text": "Medicine 2",
+            "text": med[2],
             "color": "#ffffff",
             "align": "start",
             "size": "md",
@@ -286,7 +288,7 @@ def message_text(event):
             "contents": [
               {
                 "type": "text",
-                "text": "2 capsule before meals",
+                "text": howto[2],
                 "color": "#8C8C8C",
                 "size": "sm",
                 "wrap": true
@@ -355,14 +357,14 @@ def message_text(event):
             "contents": [
               {
                 "type": "text",
-                "text": "Medicine 1",
+                "text": med[0],
                 "size": "sm",
                 "color": "#555555",
                 "flex": 0
               },
               {
                 "type": "text",
-                "text": "$15.00",
+                "text": price[0],
                 "size": "sm",
                 "color": "#111111",
                 "align": "end"
@@ -375,14 +377,14 @@ def message_text(event):
             "contents": [
               {
                 "type": "text",
-                "text": "Medicine 2",
+                "text": med[1],
                 "size": "sm",
                 "color": "#555555",
                 "flex": 0
               },
               {
                 "type": "text",
-                "text": "$7.00",
+                "text": price[1],
                 "size": "sm",
                 "color": "#111111",
                 "align": "end"
@@ -395,14 +397,14 @@ def message_text(event):
             "contents": [
               {
                 "type": "text",
-                "text": "Medicine 3",
+                "text": med[2],
                 "size": "sm",
                 "color": "#555555",
                 "flex": 0
               },
               {
                 "type": "text",
-                "text": "$12.00",
+                "text": price[2],
                 "size": "sm",
                 "color": "#111111",
                 "align": "end"
@@ -445,7 +447,7 @@ def message_text(event):
               },
               {
                 "type": "text",
-                "text": "$34.00",
+                "text": price[1]+price[0]+price[2],
                 "size": "sm",
                 "color": "#111111",
                 "align": "end"
@@ -464,7 +466,7 @@ def message_text(event):
               },
               {
                 "type": "text",
-                "text": "$40.00",
+                "text": money,
                 "size": "sm",
                 "color": "#111111",
                 "align": "end"
@@ -483,7 +485,7 @@ def message_text(event):
               },
               {
                 "type": "text",
-                "text": "$6.00",
+                "text": "$"+40-(price[1]+price[0]+price[2]),
                 "size": "sm",
                 "color": "#111111",
                 "align": "end"
@@ -534,19 +536,6 @@ def message_text(event):
         event.reply_token,
         output
     )
-
-
-@handler.add(VideoPlayCompleteEvent)
-def handle_follow(event):
-    event_name = event.video_play_complete.tracking_id
-    output = 'Video fail'
-    if event_name == 'video1':
-        output = 'Complete'
-    line_bot_api.reply_message(
-        event.reply_token,
-        messages=[TextSendMessage(text=output)]
-    )
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
