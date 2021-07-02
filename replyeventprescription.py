@@ -56,6 +56,9 @@ def callback():
 
 
 @handler.add(MessageEvent, message=TextMessage)
+med[x]=input("Add your perscription: ")
+
+
 def message_text(event):
     message = event.message.text
     if message == 'Check Prescription':
@@ -73,7 +76,7 @@ def message_text(event):
         "contents": [
           {
             "type": "text",
-            "text": "Medicine 1",
+            "text": med[0],
             "color": "#ffffff",
             "align": "start",
             "size": "md",
