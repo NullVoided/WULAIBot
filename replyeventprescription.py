@@ -53,14 +53,16 @@ def callback():
         abort(400)
 
     return 'OK'
-
+#this is the start of my edits
 
 @handler.add(MessageEvent, message=TextMessage)
+#this is the input part for the user to enter their perscription info 
+
 med[x] = input("Add your perscription: ")
 howto[x] = input("Schedule of consumption: ")
 price[x] = input("Price of prescription: ")
 
-
+#this is the command to check perscription
 def message_text(event):
     message = event.message.text
     if message == 'Check Prescription':
@@ -78,7 +80,7 @@ def message_text(event):
         "contents": [
           {
             "type": "text",
-            "text": med[0],
+            "text": med[0],   #this is the first med the user enters on the input part
             "color": "#ffffff",
             "align": "start",
             "size": "md",
@@ -130,7 +132,7 @@ def message_text(event):
             "contents": [
               {
                 "type": "text",
-                "text": howto[0],
+                "text": howto[0], #this is the perscription method eg. 2 tablets after meals a  day
                 "color": "#8C8C8C",
                 "size": "sm",
                 "wrap": true
@@ -311,7 +313,7 @@ def message_text(event):
                 }
             }
         )
-     elif message == 'Medicine Reciept':
+     elif message == 'Medicine Reciept': #the receipt for the medicine
      output = FlexSendMessage(
      alt_text='hello',
      contents={
@@ -364,7 +366,7 @@ def message_text(event):
               },
               {
                 "type": "text",
-                "text": price[0],
+                "text": price[0], # price of the first medicine
                 "size": "sm",
                 "color": "#111111",
                 "align": "end"
